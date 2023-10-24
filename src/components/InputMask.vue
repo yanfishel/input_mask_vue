@@ -39,12 +39,9 @@ const update = (e) => {
       startPos === 2 || startPos === 5 ? 0 : startPos > 5 ? startPos - 6 : startPos > 2 ? startPos - 3 : startPos
   ]
 
+  date.value[section[0]][section[1]] = e.key
 
-  date.value[section[0]][section[1]] = e.key*1
-
-  const isEmpty = date.value.every(sec=>sec.every(val=>val===null))
-
-  input.value = isEmpty ? '' : date.value.map(section=>section.map(val=>val??'_').join('')).join('/')
+  input.value = formattedValue()
 
 }
 
@@ -68,80 +65,6 @@ const onfocus = (e)=>{
 const onblur = (e) => {
   e.target.placeholder = "mm/dd/yyyy"
 }
-
-  /*export default {
-    name: "InputMask",
-    props: {
-      formatOptions: {
-        type: Object,
-        default() {
-          return {};
-        },
-      },
-      value: {
-        type: String,
-        default: "",
-        required: true,
-      }
-    },
-    data() {
-      return {
-        formatedValue: this.processFormatting(this.value, this.formatOptions),
-        prevValue: "",
-        position: 0,
-      };
-    },
-    directives: {
-      inputMask: {
-        update(e) {
-          let positionDiff = 0;
-          if (e.dataset.prevValue.length === (e.value.length - 1)) {
-            positionDiff = 1;
-          }
-          if (e.dataset.prevValue.length === (e.value.length + 1)) {
-            positionDiff = -1;
-          }
-          if (e.selectionEnd !== e.dataset.position) {
-            e.selectionEnd = Number(e.dataset.position) + positionDiff;
-          }
-        }
-      }
-    },
-    watch: {
-      value() {
-        this.formatedValue = this.processFormatting(this.value, this.formatOptions);
-      }
-    },
-    methods: {
-      onBlurHandler(e) {
-        this.$emit("blur", e);
-      },
-      handleInput(e) {
-        this.prevValue = e.target.value;
-
-        let targetValue = this.unformat(e.target.value);
-
-        this.position = e.target.selectionStart;
-        this.formatedValue = this.formatDate(targetValue, this.formatOptions)
-        this.$emit("input", this.formatedValue);
-      },
-      processFormatting(value, formatOptions) {
-        if (!value) {
-          return 0;
-        }
-        if (typeof value === "string" && value.indexOf(',') >= 0) {
-          return value;
-        }
-        return formatNumber(value, formatOptions);
-      },
-      unformat(value) {
-        return value
-      },
-      formatDate(value, formatOptions) {
-        return value;
-      }
-    }
-  };*/
 
 </script>
 
